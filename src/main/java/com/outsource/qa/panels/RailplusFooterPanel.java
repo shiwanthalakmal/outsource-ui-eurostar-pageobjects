@@ -1,6 +1,8 @@
 package com.outsource.qa.panels;
 
 import com.outsource.qa.pages.BasicPage;
+import com.outsource.qa.pages.RailPrivacyPage;
+import com.outsource.qa.pages.RailSiteMapPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -22,5 +24,15 @@ public class RailplusFooterPanel extends BasicPage{
     public RailplusFooterPanel(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public RailSiteMapPage click_Sitemap_Link(){
+        lnkSite.click();
+        return new RailSiteMapPage(driver);
+    }
+
+    public RailPrivacyPage click_Privacy_Link(){
+        lnkSite.click();
+        return new RailPrivacyPage(driver);
     }
 }

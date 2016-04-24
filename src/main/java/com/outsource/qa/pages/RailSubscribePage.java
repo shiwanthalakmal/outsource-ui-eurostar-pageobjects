@@ -10,23 +10,23 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Created by user on 4/20/2016.
+ * Created by user on 4/23/2016.
  */
-public class RailTimetablePage extends BasicPage {
+public class RailSubscribePage extends BasicPage {
 
-    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h1")     private WebElement lblTimetableTitle;
+    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h1")     private WebElement lblSubscribeTitle;
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
 
-    public RailTimetablePage(RemoteWebDriver driver) {
+    public RailSubscribePage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         headerPanel = new RailplusHeaderPanel(driver);
         footerPanel = new RailplusFooterPanel(driver);
     }
 
-    public RailTimetablePage check_And_Validate_PageHeader(String title){
-        Assert.assertEquals(title, lblTimetableTitle.getText());
+    public RailSubscribePage check_And_Validate_PageHeader(String title){
+        Assert.assertEquals(title, lblSubscribeTitle.getText());
         return this;
     }
 }

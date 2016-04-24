@@ -1,11 +1,12 @@
 package com.outsource.qa.panels;
 
-import com.outsource.qa.pages.BasicPage;
+import com.outsource.qa.pages.*;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+
 
 /**
  * Created by user on 4/18/2016.
@@ -64,4 +65,55 @@ public class RailplusHeaderPanel extends BasicPage {
     public void test_step(){
         lnkAbout.click();
     }
+
+    public WebElement getHomeSubMenutab(){
+        return btnHomeTab;
+    }
+
+    public WebElement getAboutMenuLink(){
+        return lnkAbout;
+    }
+
+    public WebElement getContactMenuLink(){
+        return lnkContact;
+    }
+
+    public WebElement getMapsMenuLink(){
+        return lnkMap;
+    }
+
+    public WebElement getTimetableMenuLink(){
+        return lnkTimetable;
+    }
+
+    public WebElement getSubscribeMenuLink(){
+        return lnkSubscribe;
+    }
+
+    public RailAboutPage click_About_link(){
+        this.lnkAbout.click();
+        return new RailAboutPage(driver);
+    }
+
+    public RailContactPage click_Contact_Link(){
+        this.lnkContact.click();
+        return new RailContactPage(driver);
+    }
+
+    public RailMapPage click_Maps_Link(){
+        this.lnkMap.click();
+        return new RailMapPage(driver);
+    }
+
+    public RailTimetablePage click_Timetable_Link(){
+        this.lnkTimetable.click();
+        return new RailTimetablePage(driver);
+    }
+
+    public RailSubscribePage click_Subscribe_Link(){
+        this.lnkSubscribe.click();
+        return new RailSubscribePage(driver);
+    }
+
+
 }

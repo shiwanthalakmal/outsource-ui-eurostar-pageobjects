@@ -1,6 +1,8 @@
 package com.outsource.qa.panels;
 
 import com.outsource.qa.pages.BasicPage;
+import com.outsource.qa.pages.RailplusHomePage;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -67,18 +69,50 @@ public class TravelModalPanel extends BasicPage {
         PageFactory.initElements(driver, this);
     }
 
+    public RailplusHomePage action_Ticket_Type_Default_Status(){
+        Assert.assertTrue(radioBtnOnewaOption.isSelected());
+        Assert.assertTrue(!radioBtnchkBxReturnOption.isSelected());
+        return new RailplusHomePage(driver);
+    }
+
+    public RailplusHomePage action_Fare_Type_Default_Status(){
+        Assert.assertTrue(radioBtnCheapestFares.isSelected());
+        Assert.assertTrue(!radioBtnFlexibleFares.isSelected());
+        Assert.assertTrue(!radioBtnDirectTrains.isSelected());
+        return new RailplusHomePage(driver);
+    }
+
+    public RailplusHomePage action_Seat_Reservation_Default_Status(){
+        Assert.assertTrue(!chkBxSeatReservation.isSelected());
+        return new RailplusHomePage(driver);
+    }
+
     /**
      * Action: Choose Home Page Banner Modal Option
      * @param tab
      */
-    private void action_Click_Banner_Modal_Option(String tab){
-        if (tab.equals("train")){
+    public void action_Click_Banner_Modal_Option(String tab){
+        if (tab.equals("Train")){
             btnTrainTicketsTab.click();
-        }else if (tab.equals("rail")){
+        }else if (tab.equals("Rail")){
             btnRailPassesTab.click();
-        }else if (tab.equals("travel")){
+        }else if (tab.equals("Travel")){
             btnTravelExtrasTab.click();
-        }else if (tab.equals("ferry")){
+        }else if (tab.equals("Ferry")){
+            btnFerryTicketsTab.click();
+        }else{
+
+        }
+    }
+
+    public void action_verify_modal_title(String tab){
+        if (tab.equals("Train")){
+            btnTrainTicketsTab.click();
+        }else if (tab.equals("Rail")){
+            btnRailPassesTab.click();
+        }else if (tab.equals("Travel")){
+            btnTravelExtrasTab.click();
+        }else if (tab.equals("Ferry")){
             btnFerryTicketsTab.click();
         }else{
 
@@ -89,7 +123,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Change One-way Choose Option
      * @param state
      */
-    private void action_Oneway_Radio_Status(String state){
+    public void action_Oneway_Radio_Status(String state){
         if (state.equals("OFF")){
 
         }else{
@@ -101,7 +135,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Change One-way Choose Option
      * @param state
      */
-    private void action_Return_Radio_Status(String state){
+    public void action_Return_Radio_Status(String state){
         if (state.equals("OFF")){
 
         }else{
@@ -113,7 +147,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Departure Station Details
      * @param station
      */
-    private void action_Set_Departure_Station(String station){
+    public void action_Set_Departure_Station(String station){
         txtFldDepartureStation.clear();
         txtFldDepartureStation.sendKeys(station);
     }
@@ -122,7 +156,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Arrival Station Details
      * @param station
      */
-    private void action_Set_Arrival_Station(String station){
+    public void action_Set_Arrival_Station(String station){
         txtFldArrivalStation.clear();
         txtFldArrivalStation.sendKeys(station);
     }
@@ -131,7 +165,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Departure Date
      * @param date
      */
-    private void action_Set_Departure_Date(String date){
+    public void action_Set_Departure_Date(String date){
         txtFldDepartureDate.sendKeys(date);
     }
 
@@ -149,7 +183,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Adults Option
      * @param adult
      */
-    private void action_Set_Adults_Option(String adult){
+    public void action_Set_Adults_Option(String adult){
         new Select(ddlAdultOption).selectByVisibleText(adult);
     }
 
@@ -157,7 +191,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Child Option
      * @param child
      */
-    private void action_Set_Child_Option(String child){
+    public void action_Set_Child_Option(String child){
         new Select(ddlChildOption).selectByVisibleText(child);
     }
 
@@ -165,7 +199,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Seniors Option
      * @param senior
      */
-    private void action_Set_Seniors_Option(String senior){
+    public void action_Set_Seniors_Option(String senior){
         new Select(ddlSeniorOption).selectByVisibleText(senior);
     }
 
@@ -173,7 +207,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Youths Option
      * @param youth
      */
-    private void action_Set_Youths_Option(String youth){
+    public void action_Set_Youths_Option(String youth){
         new Select(ddlYouthOption).selectByVisibleText(youth);
     }
 
@@ -181,7 +215,7 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Seat Reservation Availability
      * @param state
      */
-    private void action_Seat_Reservation_Availability(String state){
+    public void action_Seat_Reservation_Availability(String state){
         if (state.equals("OFF")){
 
         }else{
@@ -194,7 +228,7 @@ public class TravelModalPanel extends BasicPage {
      * @param option
      * @param state
      */
-    private void action_Set_Fares_Availability(String option,String state){
+    public void action_Set_Fares_Availability(String option,String state){
         if (option.equals("cheapest")){
 
         }else if (option.equals("flexible")){
@@ -207,21 +241,21 @@ public class TravelModalPanel extends BasicPage {
     /**
      * Action: Click 'Search For Trains' Option
      */
-    private void action_Click_Search_For_Trains(){
+    public void action_Click_Search_For_Trains(){
         btnSearchForTrains.click();
     }
 
     /**
      * Action: Click'Age Rules' Link
      */
-    private void action_Age_Rules_Link(){
+    public void action_Age_Rules_Link(){
         lnkAgeRules.click();
     }
 
     /**
      * Action: Book Train Ticket Link
      */
-    private void action_Book_Train_Ticket_Link(){
+    public void action_Book_Train_Ticket_Link(){
         lnkCanBookTicket.click();
     }
 
