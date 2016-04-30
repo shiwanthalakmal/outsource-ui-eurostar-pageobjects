@@ -25,8 +25,12 @@ public class RailplusHeaderPanel extends BasicPage {
     private WebElement lnkSubscribe;
     @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[1]/a")
     private WebElement btnManageBooking;
+    @FindBy(how= How.XPATH,using = "//*[@id='btnGetBooking']")
+    private WebElement btnManageBookingLogin;
     @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[2]/a")
     private WebElement btnRailSignIn;
+    @FindBy(how= How.XPATH,using = "//*[@id='login']")
+    private WebElement btnSignInLogin;
     @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[3]/a")
     private WebElement btnCorporateSite;
     @FindBy(how= How.XPATH,using = "//*[@id='phone']/span/a")
@@ -90,6 +94,14 @@ public class RailplusHeaderPanel extends BasicPage {
         return lnkSubscribe;
     }
 
+    public WebElement getManageMenulink() { return btnManageBooking; }
+
+    public WebElement getManageLoginlink() { return btnManageBookingLogin; }
+
+    public WebElement getSignInMenuLink() {return btnRailSignIn; }
+
+    public WebElement getBtnSignInLogin() {return btnSignInLogin; }
+
     public RailAboutPage click_About_link(){
         this.lnkAbout.click();
         return new RailAboutPage(driver);
@@ -114,6 +126,17 @@ public class RailplusHeaderPanel extends BasicPage {
         this.lnkSubscribe.click();
         return new RailSubscribePage(driver);
     }
+
+    public RailManageBookPage click_Manage_Booking_Link(){
+        this.btnManageBooking.click();
+        return new RailManageBookPage(driver);
+    }
+
+    public RailSignInPage click_My_SignIn_Link(){
+        this.btnRailSignIn.click();
+        return new RailSignInPage(driver);
+    }
+
 
 
 }

@@ -4,7 +4,9 @@ import com.outsource.qa.panels.RailplusFooterPanel;
 import com.outsource.qa.panels.RailplusHeaderPanel;
 import com.outsource.qa.panels.TravelModalPanel;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -58,7 +60,7 @@ public class RailplusHomePage extends BasicPage{
         Assert.assertEquals(title, lblHomeTitle.getText());
     }
 
-    public void check_And_validate_Staying_Home_page(){
+    public void check_And_Validate_Staying_Home_page(){
         Assert.assertTrue(headerPanel.getHomeSubMenutab().getAttribute("class").equals("home rounded-top"));
     }
 
@@ -72,6 +74,36 @@ public class RailplusHomePage extends BasicPage{
         else if (link.equals("Privacy")){footerPanel.click_Privacy_Link();return new RailPrivacyPage(driver);}
         else{}
         return null;
+    }
+
+    public Object step_Click_Given_Special_Main_Menu_Link(String link){
+        if (link.equals("Manage")){headerPanel.click_Manage_Booking_Link();return new RailManageBookPage(driver);}
+        else if (link.equals("Signin")){headerPanel.click_My_SignIn_Link();return new RailSignInPage(driver);}
+        else if (link.equals("Corporate")){headerPanel.click_Maps_Link();return new RailMapPage(driver);}
+        else{}
+        return null;
+    }
+
+    public RailManageBookPage step_Manage_Booking_link_Mouse_Over_And_Login_Without_Details(){
+        Actions action = new Actions(driver);
+        action.moveToElement(headerPanel.getManageMenulink()).build().perform();
+        headerPanel.getManageLoginlink().click();
+        return new RailManageBookPage(driver);
+    }
+
+    public RailSignInPage step_My_Sign_In_Link_Mouse_Over_And_Login_Without_Details(){
+
+        return new RailSignInPage(driver);
+    }
+
+    public RailSignInPage step_My_Sign_In_fill_username_feild(){
+
+        return new RailSignInPage(driver);
+    }
+
+    public RailSignInPage step_My_Sign_In_fill_password_feild(){
+
+        return new RailSignInPage(driver);
     }
 
     public RailplusHomePage step_Click_Given_Modal_Tab(String tab){
