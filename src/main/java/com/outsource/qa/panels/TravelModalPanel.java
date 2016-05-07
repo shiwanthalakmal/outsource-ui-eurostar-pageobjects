@@ -128,9 +128,9 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Oneway_Radio_Status(String state){
         if (state.equals("OFF")){
-
+            if(radioBtnOnewaOption.isSelected()){radioBtnOnewaOption.click();}
         }else{
-
+            if(!radioBtnOnewaOption.isSelected()){radioBtnOnewaOption.click();}
         }
     }
 
@@ -142,7 +142,7 @@ public class TravelModalPanel extends BasicPage {
         if (state.equals("OFF")){
             if(radioBtnchkBxReturnOption.isSelected()){radioBtnchkBxReturnOption.click();}
         }else{
-            radioBtnchkBxReturnOption.click();
+            if(!radioBtnchkBxReturnOption.isSelected()){radioBtnchkBxReturnOption.click();}
         }
     }
 
@@ -264,6 +264,11 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Click_Search_For_Trains(){
         btnSearchForTrains.click();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

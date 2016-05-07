@@ -54,8 +54,6 @@ public class RailplusHomePage extends BasicPage{
         headerPanel.test_step();
     }
 
-
-
     public void check_And_Validate_Eurostar_Home_Page(String title){
         Assert.assertEquals(title, lblHomeTitle.getText());
     }
@@ -170,6 +168,11 @@ public class RailplusHomePage extends BasicPage{
         return this;
     }
 
+    public RailplusHomePage click_OneWay_Search_Option(String state){
+        ticketPanel.action_Oneway_Radio_Status(state);
+        return this;
+    }
+
     public RailplusHomePage step_Set_Travel_Scheduled_Date(String date){
         ticketPanel.action_Set_Departure_Date(date);
         return this;
@@ -179,6 +182,22 @@ public class RailplusHomePage extends BasicPage{
 
         return this;
     }
+
+    public RailplusHomePage step_Set_Arrival_Station(String arrival){
+        ticketPanel.action_Set_Arrival_Station(arrival);
+        return this;
+    }
+
+    public RailplusHomePage step_Set_Departure_Station(String departure){
+        ticketPanel.action_Set_Departure_Station(departure);
+        return this;
+    }
+
+    public RailSearchResultPage step_Perform_Search_Train(){
+        ticketPanel.action_Click_Search_For_Trains();
+        return new RailSearchResultPage(driver);
+    }
+
 
     public RailplusHomePage step_Click_Banner_Pagination_icon(int index){
         switch(index){

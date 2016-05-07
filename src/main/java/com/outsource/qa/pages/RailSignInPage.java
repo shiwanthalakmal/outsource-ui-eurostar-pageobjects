@@ -18,12 +18,15 @@ public class RailSignInPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "(//input[@id='agent_email'])[2]")                           private WebElement txtFldUsername;
     @FindBy(how= How.XPATH,using = "(//input[@id='agent_password'])[2]")                        private WebElement txtFldPassword;
     @FindBy(how= How.XPATH,using = "(//input[@name='login'])[2]")                               private WebElement btnSignin;
-    @FindBy(how= How.XPATH,using = "//*[@id='agentslogin']/p/a[1]")                             private WebElement lnkForgotPass;
-    @FindBy(how= How.XPATH,using = "//*[@id='agentslogin']/p/a[2]")                             private WebElement lnkNewArgent;
+    @FindBy(how= How.XPATH,using = "(//a[contains(text(),'Forgot Password')])[2]")              private WebElement lnkForgotPass;
+    @FindBy(how= How.XPATH,using = "(//input[@id='agent_email'])[2]")                           private WebElement txtFldForgotMail;
+    @FindBy(how= How.XPATH,using = "(//a[contains(@href, '?action=new-agent')])[2]")            private WebElement lnkNewArgent;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/p/strong")                private WebElement lblErrorMsg;
-    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/form/div/div[6]/input")      private WebElement btnForgotSent;
+    @FindBy(how= How.XPATH,using = "//div[@id='content-wrapper']/div/p")                        private WebElement lblForgotErrorMsg;
+    @FindBy(how= How.XPATH,using = "//input[@value='Send']")                                    private WebElement btnForgotSent;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/p[3]/a[2]")                  private WebElement lnkLoginBack;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/p/strong")                private WebElement lnkLoginError;
+    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/h2")                         private WebElement lblForgotTitle;
 
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
@@ -67,7 +70,17 @@ public class RailSignInPage extends BasicPage {
     }
 
     public RailSignInPage check_And_Validate_ForgotPass_Error_Message(String error) {
-        Assert.assertEquals(error, lblErrorMsg.getText());
+        Assert.assertEquals(error, lblForgotErrorMsg.getText());
+        return this;
+    }
+
+    public RailSignInPage check_And_Validate_ForgotPass_Title(String title){
+        Assert.assertEquals(title, lblForgotTitle.getText());
+        return this;
+    }
+
+    public RailSignInPage check_And_Validate_Registration_Title(String title){
+        Assert.assertEquals(title, lblForgotTitle.getText());
         return this;
     }
 
@@ -77,7 +90,7 @@ public class RailSignInPage extends BasicPage {
     }
 
     public RailSignInPage step_Set_Forgot_Password_Recovery_Mail(String mail){
-        txtFldUsername.sendKeys(mail);
+        txtFldForgotMail.sendKeys(mail);
         return this;
     }
 
@@ -90,4 +103,23 @@ public class RailSignInPage extends BasicPage {
         lnkLoginBack.click();
         return this;
     }
+
+    public RailRegistrationPage step_Click_New_Argent_Registration(){
+        lnkNewArgent.click();
+        return new RailRegistrationPage(driver);
+    }
+
+    public RailSignInPage check_And_Validate_Login_UI_Availability(){
+        Assert.assertTrue(txtFldUsername.isDisplayed());
+        Assert.assertTrue(txtFldPassword.isDisplayed());
+        Assert.assertTrue(btnSignin.isDisplayed());
+        return this;
+    }
+
+    public RailSignInPage check_And_Validate_Login_Link_Availability(){
+        Assert.assertTrue(lnkNewArgent.isDisplayed());
+        Assert.assertTrue(lnkForgotPass.isDisplayed());
+        return this;
+    }
+
 }
