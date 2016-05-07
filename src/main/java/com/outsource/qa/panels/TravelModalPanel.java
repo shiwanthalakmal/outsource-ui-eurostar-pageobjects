@@ -3,6 +3,7 @@ package com.outsource.qa.panels;
 import com.outsource.qa.pages.BasicPage;
 import com.outsource.qa.pages.RailplusHomePage;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,8 @@ public class TravelModalPanel extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='roundTripNo']")                                private WebElement radioBtnOnewaOption;
     @FindBy(how= How.XPATH,using = "//*[@id='roundTripYes']")                               private WebElement radioBtnchkBxReturnOption;
     @FindBy(how= How.XPATH,using = "//*[@id='departureStation']")                           private WebElement txtFldDepartureStation;
+    @FindBy(how= How.XPATH,using = "//*[@id='returnDate']")                                 private WebElement txtFldReturnDate;
+    @FindBy(how= How.XPATH,using = "//*[@id='returnTimePeriodDisplay']")                    private WebElement txtFldReturnTime;
     @FindBy(how= How.XPATH,using = "//*[@id='arrivalStation']")                             private WebElement txtFldArrivalStation;
     @FindBy(how= How.XPATH,using = "//*[@id='departureDate']")                              private WebElement txtFldDepartureDate;
     @FindBy(how= How.XPATH,using = "//*[@id='departureTimePeriodDisplay']")                 private WebElement btnDepartureTime;
@@ -137,9 +140,9 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Return_Radio_Status(String state){
         if (state.equals("OFF")){
-
+            if(radioBtnchkBxReturnOption.isSelected()){radioBtnchkBxReturnOption.click();}
         }else{
-
+            radioBtnchkBxReturnOption.click();
         }
     }
 
@@ -166,7 +169,8 @@ public class TravelModalPanel extends BasicPage {
      * @param date
      */
     public void action_Set_Departure_Date(String date){
-        txtFldDepartureDate.sendKeys(date);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('departureDate').value = '"+date+"';");
     }
 
     /**
@@ -177,6 +181,23 @@ public class TravelModalPanel extends BasicPage {
         btnDepartureTime.clear();
         new Select(ddlDepartureTime).selectByVisibleText(time);
         btnDepartureOk.click();
+    }
+
+    /**
+     * Action: Return Return Date Text
+     * @return String
+     */
+    public void action_Set_Return_Ticket_Date(String date){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('returnDate').value = '"+date+"';");
+    }
+
+    /**
+     * Action: Return Return Time Text
+     * @return String
+     */
+    public String action_Get_Return_Ticket_Time(){
+        return txtFldReturnTime.getAttribute("value");
     }
 
     /**

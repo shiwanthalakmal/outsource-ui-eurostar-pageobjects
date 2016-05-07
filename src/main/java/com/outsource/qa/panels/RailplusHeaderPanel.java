@@ -27,7 +27,7 @@ public class RailplusHeaderPanel extends BasicPage {
     private WebElement btnManageBooking;
     @FindBy(how= How.XPATH,using = "//*[@id='btnGetBooking']")
     private WebElement btnManageBookingLogin;
-    @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[2]/a")
+    @FindBy(how= How.XPATH,using = "//div[@id='header-bar-navigation']/div/ul/li[2]/a")
     private WebElement btnRailSignIn;
     @FindBy(how= How.XPATH,using = "//*[@id='login']")
     private WebElement btnSignInLogin;

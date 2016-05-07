@@ -15,9 +15,9 @@ import org.openqa.selenium.support.PageFactory;
 public class RailSignInPage extends BasicPage {
 
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h1")                      private WebElement txtHeaderTitle;
-    @FindBy(how= How.XPATH,using = "//input[@id='agent_email']")                                private WebElement txtFldUsername;
-    @FindBy(how= How.XPATH,using = "//*[@id='agent_password']")                                 private WebElement txtFldPassword;
-    @FindBy(how= How.XPATH,using = "//*[@id='agentslogin']/table/tbody/tr[3]/td[2]/input")      private WebElement btnSignin;
+    @FindBy(how= How.XPATH,using = "(//input[@id='agent_email'])[2]")                           private WebElement txtFldUsername;
+    @FindBy(how= How.XPATH,using = "(//input[@id='agent_password'])[2]")                        private WebElement txtFldPassword;
+    @FindBy(how= How.XPATH,using = "(//input[@name='login'])[2]")                               private WebElement btnSignin;
     @FindBy(how= How.XPATH,using = "//*[@id='agentslogin']/p/a[1]")                             private WebElement lnkForgotPass;
     @FindBy(how= How.XPATH,using = "//*[@id='agentslogin']/p/a[2]")                             private WebElement lnkNewArgent;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/p/strong")                private WebElement lblErrorMsg;

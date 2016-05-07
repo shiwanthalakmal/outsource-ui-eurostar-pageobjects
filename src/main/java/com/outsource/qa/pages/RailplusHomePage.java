@@ -92,7 +92,7 @@ public class RailplusHomePage extends BasicPage{
     }
 
     public RailSignInPage step_My_Sign_In_Link_Mouse_Over_And_Login_Without_Details(){
-
+        headerPanel.getBtnSignInLogin().click();
         return new RailSignInPage(driver);
     }
 
@@ -151,6 +151,32 @@ public class RailplusHomePage extends BasicPage{
 
     public RailplusHomePage step_Close_Age_Rule_overlay(){
         btnAgeRuleOverlayClose.click();
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Return_Date(String date){
+        //Assert.assertTrue(ticketPanel.action_Set_Return_Ticket_Date(date).contains(date));
+        //Assert.assertTrue(ticketPanel.action_Set_Return_Ticket_Date(date).contains(date));
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Return_Time(String time){
+        Assert.assertTrue(ticketPanel.action_Get_Return_Ticket_Time().contains("PM") || ticketPanel.action_Get_Return_Ticket_Time().contains("AM"));
+        return this;
+    }
+
+    public RailplusHomePage click_Return_Search_Option(String state){
+        ticketPanel.action_Return_Radio_Status(state);
+        return this;
+    }
+
+    public RailplusHomePage step_Set_Travel_Scheduled_Date(String date){
+        ticketPanel.action_Set_Departure_Date(date);
+        return this;
+    }
+
+    public RailplusHomePage step_Set_Return_Scheduled_Date(String date){
+
         return this;
     }
 
