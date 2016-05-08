@@ -67,6 +67,8 @@ public class TravelModalPanel extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='booking-form-ferry']/h2")                      private WebElement lblFerryTitle;
     @FindBy(how= How.XPATH,using = "//*[@id='booking-form-ferry']/div[1]/div[2]/strong/a")  private WebElement lnkBookEngine;
 
+    @FindBy(how= How.XPATH,using = "//div[@class='error']/p")                               private WebElement lblNotFoundError;
+
     public TravelModalPanel(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -170,7 +172,7 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Set_Departure_Date(String date){
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("document.getElementById('departureDate').value = '"+date+"';");
+        jse.executeScript("document.getElementById('departureDate').value = '" + date + "';");
     }
 
     /**
@@ -189,7 +191,7 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Set_Return_Ticket_Date(String date){
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("document.getElementById('returnDate').value = '"+date+"';");
+        jse.executeScript("document.getElementById('returnDate').value = '" + date + "';");
     }
 
     /**
@@ -283,6 +285,10 @@ public class TravelModalPanel extends BasicPage {
      */
     public void action_Book_Train_Ticket_Link(){
         lnkCanBookTicket.click();
+    }
+
+    public WebElement get_Search_Not_Found_Error(){
+        return this.lblNotFoundError;
     }
 
 }

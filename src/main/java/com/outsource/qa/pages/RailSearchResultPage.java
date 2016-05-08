@@ -1,5 +1,6 @@
 package com.outsource.qa.pages;
 
+import com.outsource.qa.panels.ModifySearchPanel;
 import com.outsource.qa.panels.RailplusFooterPanel;
 import com.outsource.qa.panels.RailplusHeaderPanel;
 import com.outsource.qa.panels.TravelModalPanel;
@@ -26,10 +27,13 @@ public class RailSearchResultPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='departurePanel']/div[2]/div[10]/input[1]")                           private WebElement btnEarlierSort;
     @FindBy(how= How.XPATH,using = "//*[@id='departurePanel']/div[2]/div[10]/input[2]")                           private WebElement btnLaterSort;
     @FindBy(how= How.XPATH,using = "//*[@id='departurePanel']/div[2]/div[5]/div[1]/div[3]/span[1]")                           private WebElement lblSortText;
+    @FindBy(how= How.XPATH,using = "//*[@id='shop']/div[2]/input")                                                              private WebElement btnModifySearch;
 
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
     TravelModalPanel searchPanel;
+    ModifySearchPanel modifySearchPanel;
+    TravelModalPanel travelModalpanel;
 
     String total_cost = "";
     String sort_before = "";
@@ -40,6 +44,8 @@ public class RailSearchResultPage extends BasicPage {
         headerPanel = new RailplusHeaderPanel(driver);
         footerPanel = new RailplusFooterPanel(driver);
         searchPanel = new TravelModalPanel(driver);
+        modifySearchPanel = new ModifySearchPanel(driver);
+        travelModalpanel = new TravelModalPanel(driver);
     }
 
     public RailSearchResultPage check_And_Validate_Location_Result_Title(String from,String to){
@@ -104,5 +110,35 @@ public class RailSearchResultPage extends BasicPage {
         return this;
     }
 
+
+
+
+
+    public RailSearchResultPage step_Click_Modify_Search_Button(){
+        btnModifySearch.click();
+        return this;
+    }
+
+    public RailSearchResultPage step_Set_Departure_Station_Details(String dep){
+        modifySearchPanel.action_Set_Departure_Station(dep);
+        modifySearchPanel.get_Overlay_Title().click();
+        return this;
+    }
+
+    public RailSearchResultPage step_Set_Arrival_Station_Details(String arr){
+        modifySearchPanel.action_Set_Arrival_Station(arr);
+        modifySearchPanel.get_Overlay_Title().click();
+        return this;
+    }
+
+    public RailSearchResultPage step_Click_Search_For_Train_Button(){
+        modifySearchPanel.action_Click_Search_For_Trains();
+        return this;
+    }
+
+    public RailSearchResultPage check_And_Validate_Search_Not_Found_Error_Message(String msg){
+        Assert.assertEquals(msg,travelModalpanel.get_Search_Not_Found_Error().getText());
+        return this;
+    }
 
 }

@@ -185,11 +185,13 @@ public class RailplusHomePage extends BasicPage{
 
     public RailplusHomePage step_Set_Arrival_Station(String arrival){
         ticketPanel.action_Set_Arrival_Station(arrival);
+        lblHomeTitle.click();
         return this;
     }
 
     public RailplusHomePage step_Set_Departure_Station(String departure){
         ticketPanel.action_Set_Departure_Station(departure);
+        lblHomeTitle.click();
         return this;
     }
 
