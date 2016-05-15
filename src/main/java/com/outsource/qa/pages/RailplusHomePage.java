@@ -22,8 +22,10 @@ import org.openqa.selenium.support.PageFactory;
 public class RailplusHomePage extends BasicPage{
 
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h1")          private WebElement lblHomeTitle;
+    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h2")          private WebElement lblAgencyCode;
 
     @FindBy(how= How.XPATH,using = "//*[@id='backtotop']/a")                        private WebElement lnkBackTop;
+
 
     @FindBy(how= How.XPATH,using = "//*[@id='slide-show-control-previous']/a")      private WebElement lnkPaginationLeft;
     @FindBy(how= How.XPATH,using = "//*[@id='slide-show-control-slide1']/a")        private WebElement lnkPaginationOne;
@@ -35,6 +37,9 @@ public class RailplusHomePage extends BasicPage{
     //AgeRule Overlay Related
     @FindBy(how= How.XPATH,using = "//*[@id='ui-dialog-title-1']")                  private WebElement lblAgeRuleOverlayTitle;
     @FindBy(how= How.XPATH,using = "html/body/div[4]/div[11]/div/button")           private WebElement btnAgeRuleOverlayClose;
+
+    @FindBy(how= How.XPATH,using = "//*[@id='breadcrumb-navigation']/div[2]/div/div/div/a[1]/span")        private WebElement btnFacebookk;
+    @FindBy(how= How.XPATH,using = "//*[@id='breadcrumb-navigation']/div[2]/div/div/div/a[2]/span")        private WebElement btnTwitter;
 
     RailplusHeaderPanel headerPanel;
     TravelModalPanel ticketPanel;
@@ -60,6 +65,49 @@ public class RailplusHomePage extends BasicPage{
 
     public void check_And_Validate_Staying_Home_page(){
         Assert.assertTrue(headerPanel.getHomeSubMenutab().getAttribute("class").equals("home rounded-top"));
+    }
+
+    public RailplusHomePage step_Site_Logout(){
+        Actions action = new Actions(driver);
+        action.moveToElement(headerPanel.getSignInMenuLink()).build().perform();
+        headerPanel.getBtnLogout().click();
+        return this;
+    }
+
+    public void check_And_Validate_Logged_Agency_Code(String code){
+        Assert.assertEquals(code, lblAgencyCode.getText());
+    }
+
+    public void check_And_Validate_Logged_Agency_Code_Not_Available(String code){
+        check_And_Validate_Eurostar_Home_Page("Agent Area");
+    }
+
+    public RailplusHomePage step_Click_Facebook_Icon(){
+        btnFacebookk.click();
+        return this;
+    }
+
+    public RailplusHomePage step_Click_Twitter_Icon(){
+        btnTwitter.click();
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Facebook_Panel(String title){
+        try { Thread.sleep(20000);} catch (InterruptedException e) { e.printStackTrace(); }
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+        Assert.assertEquals(title, driver.getTitle());
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Twitter_Panel(String title){
+        try { Thread.sleep(20000);} catch (InterruptedException e) { e.printStackTrace(); }
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+        Assert.assertEquals(title, driver.getTitle());
+        return this;
     }
 
     public Object step_Click_Given_Main_Menu_Link(String link){
@@ -90,17 +138,24 @@ public class RailplusHomePage extends BasicPage{
     }
 
     public RailSignInPage step_My_Sign_In_Link_Mouse_Over_And_Login_Without_Details(){
-        headerPanel.getBtnSignInLogin().click();
+        Actions action = new Actions(driver);
+        action.moveToElement(headerPanel.getManageMenulink()).build().perform();
+        headerPanel.getManageLoginlink().click();
+        return new RailSignInPage(driver);
+    }
+
+    public RailSignInPage step_Signin_Forgot_Password_Quick_Link_Navigation(){
+        Actions action = new Actions(driver);
+        action.moveToElement(headerPanel.getManageMenulink()).build().perform();
+        headerPanel.click_SignIn_Forgot_Pass_Quick_Link();
         return new RailSignInPage(driver);
     }
 
     public RailSignInPage step_My_Sign_In_fill_username_feild(){
-
         return new RailSignInPage(driver);
     }
 
     public RailSignInPage step_My_Sign_In_fill_password_feild(){
-
         return new RailSignInPage(driver);
     }
 
@@ -198,6 +253,21 @@ public class RailplusHomePage extends BasicPage{
     public RailSearchResultPage step_Perform_Search_Train(){
         ticketPanel.action_Click_Search_For_Trains();
         return new RailSearchResultPage(driver);
+    }
+
+    public RailplusHomePage step_Click_RailPass_Link(){
+        ticketPanel.action_RailPass_Link();
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_RailPass_Overlay(String title){
+        Assert.assertEquals(title, ticketPanel.action_Get_RailPass_Title().getText());
+        return this;
+    }
+
+    public RailplusHomePage step_Close_RailPass_Overlay(){
+        ticketPanel.action_Close_RailPass_Overlay();
+        return this;
     }
 
 

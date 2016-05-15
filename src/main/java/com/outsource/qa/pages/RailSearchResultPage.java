@@ -64,6 +64,11 @@ public class RailSearchResultPage extends BasicPage {
         return this;
     }
 
+    public RailPassengerDetailsPage step_Perform_Shopping_Cart_Button(){
+        btnShoppingCart.click();
+        return new RailPassengerDetailsPage(driver);
+    }
+
     public RailSearchResultPage step_Select_Second_Class_Travel_Option(String option){
         total_cost = total_cost + driver.findElement(By.xpath("//*[@id='departurePanel']/div[2]/div[5]/div[3]/div/div["+option+"]//span")).getText();
         driver.findElement(By.xpath("//*[@id='departurePanel']/div[2]/div[5]/div[3]/div/div["+option+"]//input")).click();

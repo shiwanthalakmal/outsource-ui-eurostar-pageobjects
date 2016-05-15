@@ -45,6 +45,9 @@ public class TravelModalPanel extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='packageTypeDirect']")                          private WebElement radioBtnDirectTrains;
     @FindBy(how= How.XPATH,using = "//*[@id='btnSearchForTrainTickets']")                   private WebElement btnSearchForTrains;
     @FindBy(how= How.XPATH,using = "//*[@id='journeyDetails']/div[20]/div[2]/strong/a")     private WebElement lnkCanBookTicket;
+    @FindBy(how= How.XPATH,using = "//*[@id='journeyDetails']/div[12]/div/label/span/strong/a")     private WebElement lnkRailPass;
+    @FindBy(how= How.XPATH,using = "//*[@id='ui-dialog-title-passholderFareRules']")        private WebElement lblRailPassOverlayTitle;
+    @FindBy(how= How.XPATH,using = "html/body/div[4]/div[11]/div/button")                   private WebElement btnRailPassClose;
 
     //Rail Passes Search Modal
     @FindBy(how= How.XPATH,using = "//*[@id='booking-form-passes']/h2")                     private WebElement lblRailTitle;
@@ -192,6 +195,28 @@ public class TravelModalPanel extends BasicPage {
     public void action_Set_Return_Ticket_Date(String date){
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("document.getElementById('returnDate').value = '" + date + "';");
+    }
+
+    /**
+     * Action: Click Rail Pass link
+     */
+    public void action_RailPass_Link(){
+        lnkRailPass.click();
+    }
+
+    /**
+     * Action: Return Rail-Pass Web element
+     * @return
+     */
+    public WebElement action_Get_RailPass_Title(){
+        return this.lblRailPassOverlayTitle;
+    }
+
+    /**
+     * Action: Close Rail-Pass Overlay
+     */
+    public void action_Close_RailPass_Overlay(){
+        btnRailPassClose.click();
     }
 
     /**

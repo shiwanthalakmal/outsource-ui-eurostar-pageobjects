@@ -39,6 +39,12 @@ public class RailplusHeaderPanel extends BasicPage {
     private WebElement txtSearchBox;
     @FindBy(how= How.XPATH,using = "//*[@id='header-bar-search']/form/input")
     private WebElement btnSearchGo;
+    @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[2]/div/div/div/p/a[1]")
+    private WebElement lnkForgotQuickLink;
+    @FindBy(how= How.XPATH,using = "//*[@id='header-bar-navigation']/div[1]/ul/li[2]/div/div/div/p/a[2]")
+    private WebElement lnkCreateArgentQuickLink;
+
+
 
     @FindBy(how= How.XPATH,using = "//*[@id='button-home']/a")
     private WebElement btnHomeTab;
@@ -60,6 +66,8 @@ public class RailplusHeaderPanel extends BasicPage {
     private WebElement btnNewsTab;
     @FindBy(how= How.XPATH,using = "//*[@id='nav-blog']/a")
     private WebElement btnBlogTab;
+    @FindBy(how= How.LINK_TEXT,using = "Logout")
+    private WebElement lnkLogout;
 
     public RailplusHeaderPanel(RemoteWebDriver driver) {
         super(driver);
@@ -96,11 +104,17 @@ public class RailplusHeaderPanel extends BasicPage {
 
     public WebElement getManageMenulink() { return btnManageBooking; }
 
+    public WebElement getSiginForgotQuickLink() { return lnkForgotQuickLink; }
+
     public WebElement getManageLoginlink() { return btnManageBookingLogin; }
+
+    public WebElement getCreateArgentLink() { return lnkCreateArgentQuickLink; }
 
     public WebElement getSignInMenuLink() {return btnRailSignIn; }
 
     public WebElement getBtnSignInLogin() {return btnSignInLogin; }
+
+    public WebElement getBtnLogout(){ return lnkLogout; }
 
     public RailAboutPage click_About_link(){
         this.lnkAbout.click();
@@ -137,6 +151,15 @@ public class RailplusHeaderPanel extends BasicPage {
         return new RailSignInPage(driver);
     }
 
+    public RailplusHomePage click_SignIn_Forgot_Pass_Quick_Link(){
+        lnkForgotQuickLink.click();
+        return new RailplusHomePage(driver);
+    }
+
+    public RailplusHomePage click_SignIn_Create_New_Argent(){
+        lnkCreateArgentQuickLink.click();
+        return new RailplusHomePage(driver);
+    }
 
 
 }
