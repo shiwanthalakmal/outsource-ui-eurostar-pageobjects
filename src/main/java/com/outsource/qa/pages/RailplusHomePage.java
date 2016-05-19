@@ -41,6 +41,8 @@ public class RailplusHomePage extends BasicPage{
     @FindBy(how= How.XPATH,using = "//*[@id='breadcrumb-navigation']/div[2]/div/div/div/a[1]/span")        private WebElement btnFacebookk;
     @FindBy(how= How.XPATH,using = "//*[@id='breadcrumb-navigation']/div[2]/div/div/div/a[2]/span")        private WebElement btnTwitter;
 
+    @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/h2")        private WebElement lblSearchInProgress;
+
     RailplusHeaderPanel headerPanel;
     TravelModalPanel ticketPanel;
     RailplusFooterPanel footerPanel;
@@ -65,6 +67,12 @@ public class RailplusHomePage extends BasicPage{
 
     public void check_And_Validate_Staying_Home_page(){
         Assert.assertTrue(headerPanel.getHomeSubMenutab().getAttribute("class").equals("home rounded-top"));
+    }
+
+    public RailSearchResultPage check_And_Validate_Search_Inprogress(){
+        try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
+        Assert.assertEquals("Searching for trains...",lblSearchInProgress.getText());
+        return new RailSearchResultPage(driver);
     }
 
     public RailplusHomePage step_Site_Logout(){

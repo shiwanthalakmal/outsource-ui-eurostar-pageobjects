@@ -3,6 +3,7 @@ package com.outsource.qa.pages;
 import com.outsource.qa.panels.RailplusFooterPanel;
 import com.outsource.qa.panels.RailplusHeaderPanel;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,7 @@ public class RailPassengerDetailsPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='pax_age_1']")                  private WebElement txtFldAge;
     @FindBy(how= How.XPATH,using = "//*[@id='pax_age_conditions']")         private WebElement chkBxCondition;
     @FindBy(how= How.XPATH,using = "//*[@id='btnContinue']")                private WebElement btnContinue;
+    @FindBy(how= How.XPATH,using = "//*[@id='shop']/div/div/div/div")       private WebElement lblValidationError;
 
     public RailPassengerDetailsPage(RemoteWebDriver driver) {
         super(driver);
@@ -73,5 +75,23 @@ public class RailPassengerDetailsPage extends BasicPage {
     public RailConfirmItineraryPage step_Continue_Passenger_Details_Flow(){
         btnContinue.click();
         return new RailConfirmItineraryPage(driver);
+    }
+
+    public RailPassengerDetailsPage step_Clear_Existing_Country_Record(){
+        txtFldCountry.clear();
+        return this;
+    }
+
+    public RailPassengerDetailsPage check_And_Validate_Waning_Alert_Msg_And_Accept(String msg){
+        try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
+        Alert simpleAlert = driver.switchTo().alert();
+        Assert.assertEquals(msg, simpleAlert.getText());
+        simpleAlert.accept();
+        return this;
+    }
+
+    public RailPassengerDetailsPage check_And_Validate_Validation_Error_Msg(String error){
+        Assert.assertEquals(error,lblValidationError.getText());
+        return this;
     }
 }

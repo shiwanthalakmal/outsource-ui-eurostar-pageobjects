@@ -4,6 +4,7 @@ import com.outsource.qa.panels.RailplusFooterPanel;
 import com.outsource.qa.panels.RailplusHeaderPanel;
 import com.outsource.qa.panels.TravelModalPanel;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class RailAboutPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/h1")     private WebElement lblAboutTitle;
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
+
 
     public RailAboutPage(RemoteWebDriver driver) {
         super(driver);

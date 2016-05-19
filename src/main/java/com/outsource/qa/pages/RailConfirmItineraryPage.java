@@ -28,6 +28,9 @@ public class RailConfirmItineraryPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='btnCheckOut']")                                                            private WebElement btnCheckOutProceed;
     @FindBy(how= How.XPATH,using = "//*[@id='btnContinue']")                                                            private WebElement btnContinueShopping;
     @FindBy(how= How.XPATH,using = "//*[@id='button-cart']/div/a")                                                      private WebElement lnkShoppingBag;
+    @FindBy(how= How.XPATH,using = "//*[@id='shop']/fieldset/table/tbody/tr[2]/td[2]/input")                            private WebElement btnRemoveItem;
+    @FindBy(how= How.XPATH,using = "html/body/div[3]/div[1]/span")                                                      private WebElement lblAlertTitle;
+    @FindBy(how= How.XPATH,using = "html/body/div[3]/div[11]/div/button[1]")                                            private WebElement btnAlertAccept;
 
     public RailConfirmItineraryPage(RemoteWebDriver driver) {
         super(driver);
@@ -75,6 +78,26 @@ public class RailConfirmItineraryPage extends BasicPage {
     public RailplusHomePage step_Back_To_Continue_Shopping(){
         btnContinueShopping.click();
         return new RailplusHomePage(driver);
+    }
+
+    public RailConfirmItineraryPage  step_Remove_ShoppingCart_Item(){
+        btnRemoveItem.click();
+        return this;
+    }
+
+    public RailplusHomePage step_Remove_CartItem_Acceptance_Overlay(){
+        btnAlertAccept.click();
+        return new RailplusHomePage(driver);
+    }
+
+    public RailConfirmItineraryPage step_Initial_Checkout(){
+        btnCheckOutProceed.click();
+        return this;
+    }
+
+    public RailDeliveryInfoPage step_Final_Checkout(){
+        btnCheckOutProceed.click();
+        return new RailDeliveryInfoPage(driver);
     }
 
 }
