@@ -31,7 +31,7 @@ public class TravelModalPanel extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='returnTimePeriodDisplay']")                    private WebElement txtFldReturnTime;
     @FindBy(how= How.XPATH,using = "//*[@id='arrivalStation']")                             private WebElement txtFldArrivalStation;
     @FindBy(how= How.XPATH,using = "//*[@id='departureDate']")                              private WebElement txtFldDepartureDate;
-    @FindBy(how= How.XPATH,using = "//*[@id='departureTimePeriodDisplay']")                 private WebElement btnDepartureTime;
+    @FindBy(how= How.XPATH,using = "//*[@id='departureTimePeriodDisplay']")                 private WebElement txtFldDepartureTime;
     @FindBy(how= How.XPATH,using = "//*[@id='departureTimePeriod']")                        private WebElement ddlDepartureTime;
     @FindBy(how= How.XPATH,using = "//*[@id='departureTimeDiv']/div[2]/button")             private WebElement btnDepartureOk;
     @FindBy(how= How.XPATH,using = "//*[@id='paxCountAdults']")                             private WebElement ddlAdultOption;
@@ -182,10 +182,9 @@ public class TravelModalPanel extends BasicPage {
      * Action: Set Departure Time
      * @param time
      */
-    private void action_Set_Departure_Time(String time){
-        btnDepartureTime.clear();
-        new Select(ddlDepartureTime).selectByVisibleText(time);
-        btnDepartureOk.click();
+    public void action_Set_Departure_Time(String time){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('departureTimePeriodDisplay').value = '" + time + "';");
     }
 
     /**
@@ -274,15 +273,14 @@ public class TravelModalPanel extends BasicPage {
     /**
      * Action: Set Different Faires Availability
      * @param option
-     * @param state
      */
-    public void action_Set_Fares_Availability(String option,String state){
+    public void action_Set_Fares_Availability(String option){
         if (option.equals("cheapest")){
-
+            radioBtnCheapestFares.click();
         }else if (option.equals("flexible")){
-
+            radioBtnFlexibleFares.click();
         }else if (option.equals("direct")){
-
+            radioBtnDirectTrains.click();
         }else{}
     }
 

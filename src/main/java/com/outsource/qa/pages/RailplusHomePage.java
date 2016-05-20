@@ -71,7 +71,7 @@ public class RailplusHomePage extends BasicPage{
 
     public RailSearchResultPage check_And_Validate_Search_Inprogress(){
         try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
-        Assert.assertEquals("Searching for trains...",lblSearchInProgress.getText());
+        Assert.assertEquals("Searching for trains...", lblSearchInProgress.getText());
         return new RailSearchResultPage(driver);
     }
 
@@ -242,7 +242,7 @@ public class RailplusHomePage extends BasicPage{
     }
 
     public RailplusHomePage step_Set_Return_Scheduled_Date(String date){
-
+        ticketPanel.action_Set_Departure_Time(date);
         return this;
     }
 
@@ -303,6 +303,11 @@ public class RailplusHomePage extends BasicPage{
             default :
         }
         return new RailDestinationPage(driver);
+    }
+
+    public RailplusHomePage step_Choose_Travel_Fares(String cost){
+        ticketPanel.action_Set_Fares_Availability(cost);
+        return this;
     }
 
     /**

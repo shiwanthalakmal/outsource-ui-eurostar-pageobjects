@@ -27,6 +27,7 @@ public class RailSignInPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/p[3]/a[2]")                  private WebElement lnkLoginBack;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div[1]/p/strong")                private WebElement lnkLoginError;
     @FindBy(how= How.XPATH,using = "//*[@id='content-wrapper']/div/h2")                         private WebElement lblForgotTitle;
+    @FindBy(how= How.XPATH,using = "//*[@id='breadcrumb-navigation']/div[1]/ul/li/a")           private WebElement lnkBreadcumb;
 
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
@@ -120,6 +121,12 @@ public class RailSignInPage extends BasicPage {
         Assert.assertTrue(lnkNewArgent.isDisplayed());
         Assert.assertTrue(lnkForgotPass.isDisplayed());
         return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Breadcumb_Functionality(String link){
+        Assert.assertEquals(link,lnkBreadcumb.getText());
+        lnkBreadcumb.click();
+        return new RailplusHomePage(driver);
     }
 
 }
