@@ -48,6 +48,7 @@ public class TravelModalPanel extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='journeyDetails']/div[12]/div/label/span/strong/a")     private WebElement lnkRailPass;
     @FindBy(how= How.XPATH,using = "//*[@id='ui-dialog-title-passholderFareRules']")        private WebElement lblRailPassOverlayTitle;
     @FindBy(how= How.XPATH,using = "html/body/div[4]/div[11]/div/button")                   private WebElement btnRailPassClose;
+    @FindBy(how= How.XPATH,using = "//form/div[3]")                                         private WebElement lblSearchError;
 
     //Rail Passes Search Modal
     @FindBy(how= How.XPATH,using = "//*[@id='booking-form-passes']/h2")                     private WebElement lblRailTitle;
@@ -92,6 +93,17 @@ public class TravelModalPanel extends BasicPage {
 
     public RailplusHomePage action_Seat_Reservation_Default_Status(){
         Assert.assertTrue(!chkBxSeatReservation.isSelected());
+        return new RailplusHomePage(driver);
+    }
+
+    public RailplusHomePage action_Set_Seat_Reservation_Default_Option(){
+        chkBxSeatReservation.click();
+        return new RailplusHomePage(driver);
+    }
+
+    public RailplusHomePage action_Check_Search_Search_Error_Message(String msg){
+        String[] error = lblSearchError.getText().split("\n");
+        Assert.assertEquals(msg,error[0]+error[1]);
         return new RailplusHomePage(driver);
     }
 

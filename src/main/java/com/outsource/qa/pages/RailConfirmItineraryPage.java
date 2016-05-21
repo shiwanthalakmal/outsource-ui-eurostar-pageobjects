@@ -55,13 +55,14 @@ public class RailConfirmItineraryPage extends BasicPage {
         return this;
     }
 
-    public RailConfirmItineraryPage check_And_Validate_Passenger_Details(String details){
-
+    public RailConfirmItineraryPage check_And_Validate_Passenger_Details(String details,String age){
+        Assert.assertEquals("Mrs Mala Kumari(25 - Australia)","Mrs "+details+"("+age+" - Australia)");
         return this;
     }
 
     public RailConfirmItineraryPage check_And_Validate_Travel_Locations(String desti,String arrival){
-
+        Assert.assertTrue(lblVerifyArrivalPlace.getText().contains(arrival.toUpperCase()));
+        Assert.assertTrue(lblVerifyDestinationPlace.getText().contains(desti.toUpperCase()));
         return this;
     }
 

@@ -5,6 +5,7 @@ import com.outsource.qa.panels.RailplusFooterPanel;
 import com.outsource.qa.panels.RailplusHeaderPanel;
 import com.outsource.qa.panels.TravelModalPanel;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -28,6 +29,7 @@ public class RailSearchResultPage extends BasicPage {
     @FindBy(how= How.XPATH,using = "//*[@id='departurePanel']/div[2]/div[10]/input[2]")                           private WebElement btnLaterSort;
     @FindBy(how= How.XPATH,using = "//*[@id='departurePanel']/div[2]/div[5]/div[1]/div[3]/span[1]")                           private WebElement lblSortText;
     @FindBy(how= How.XPATH,using = "//*[@id='shop']/div[2]/input")                                                              private WebElement btnModifySearch;
+    @FindBy(how= How.XPATH,using = "//*[@id='shop']/div[4]/p")                                                                  private WebElement lblNoOfPassengers;
 
     RailplusHeaderPanel headerPanel;
     RailplusFooterPanel footerPanel;
@@ -142,7 +144,22 @@ public class RailSearchResultPage extends BasicPage {
     }
 
     public RailSearchResultPage check_And_Validate_Search_Not_Found_Error_Message(String msg){
-        Assert.assertEquals(msg,travelModalpanel.get_Search_Not_Found_Error().getText());
+        Assert.assertEquals(msg, travelModalpanel.get_Search_Not_Found_Error().getText());
+        return this;
+    }
+
+    public RailSearchResultPage check_And_Validate_Waning_Alert_Message(String msg){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.switchTo().alert().accept();
+        return this;
+    }
+
+    public RailSearchResultPage check_And_Validate_NoOf_Passenger_Details(String details){
+        Assert.assertEquals(details,lblNoOfPassengers.getText());
         return this;
     }
 

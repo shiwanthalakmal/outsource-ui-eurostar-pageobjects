@@ -189,6 +189,10 @@ public class RailplusHomePage extends BasicPage{
         return ticketPanel.action_Seat_Reservation_Default_Status();
     }
 
+    public RailplusHomePage step_Choose_Seat_Reservation_Selection(){
+        return ticketPanel.action_Set_Seat_Reservation_Default_Option();
+    }
+
     public RailplusHomePage step_Click_Back_To_Top_Link(){
         lnkBackTop.click();
         return this;
@@ -249,6 +253,11 @@ public class RailplusHomePage extends BasicPage{
     public RailplusHomePage step_Set_Arrival_Station(String arrival){
         ticketPanel.action_Set_Arrival_Station(arrival);
         lblHomeTitle.click();
+        return this;
+    }
+
+    public RailplusHomePage check_And_Validate_Search_Error_Message(String msg){
+        ticketPanel.action_Check_Search_Search_Error_Message(msg);
         return this;
     }
 
